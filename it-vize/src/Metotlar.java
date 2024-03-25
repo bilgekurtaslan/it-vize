@@ -47,27 +47,33 @@ public class Metotlar {
                 break;
             }
         }
-            if (!bulundu) {
-                System.out.println("Aranan isim bulunamadı!");
-            }
+        if (!bulundu) {
+            System.out.println("Aranan isim bulunamadı!");
+        }
 
     }
-    public static void ortalama(List<String> isim, List<Integer> vizeNotu, List<Integer> finalNotu) {
+    public static void ortalama(List<String> isim, List<Integer> vizeNotu, List<Integer> finalNotu, List<Double> ortalama) {
+        ortalama.clear(); // Mevcut ortalamaları temizle, her çağrıda yeniden hesapla.
         for (int i = 0; i < isim.size(); i++) {
-            double ortalama = ((vizeNotu.get(i) * 40 / 100) + (finalNotu.get(i) * 60 / 100));
-            String durum = (ortalama >= 50) ? "Geçti" : "Kaldı";
-            System.out.println(isim.get(i) + " isimli öğrencinin başarı durumu: " + durum + " Notu: " +ortalama);
-
-
+            double ort = ((vizeNotu.get(i) * 40 / 100) + (finalNotu.get(i) * 60 / 100));
+            ortalama.add(ort); // Hesaplanan ortalamayı listeye ekle
+            String durum = (ort >= 50) ? "Geçti" : "Kaldı";
+            System.out.println(isim.get(i) + " isimli öğrencinin başarı durumu: " + durum + " Notu: " + ort);
         }
     }
+
     public static void enKucuk(List<String> isim, List<Double> ortalama) {
-        // En küçük ortalamayı ve ismi saklamak için değişkenler
-        double enKucukOrtalama = ortalama.get(0);
-        String enKucukIsim = isim.get(0);
+        // Listenin boş olup olmadığını kontrol et
+        if (ortalama.isEmpty()) {
+            System.out.println("Ortalama listesi boş. En düşük ortalamayı hesaplamak mümkün değil.");
+            return; // List boşsa, metodun geri kalanını çalıştırmadan çık
+        }
+
+        double enKucukOrtalama = Double.MAX_VALUE;
+        String enKucukIsim = "";
 
         // Döngü kullanarak tüm ortalamaları kontrol etme
-        for (int i = 1; i < ortalama.size(); i++) {
+        for (int i = 0; i < ortalama.size(); i++) {
             if (ortalama.get(i) < enKucukOrtalama) {
                 enKucukOrtalama = ortalama.get(i);
                 enKucukIsim = isim.get(i);
@@ -78,7 +84,6 @@ public class Metotlar {
         System.out.println("En düşük ortalamaya sahip öğrenci: " + enKucukIsim);
         System.out.println("Ortalaması: " + enKucukOrtalama);
     }
-
 }
 
 

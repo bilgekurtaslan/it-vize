@@ -25,8 +25,9 @@ public class vizefinalbasari {
                     Metotlar.arama(scanner,isim,soyisim,vizeNotu,finalNotu);
                     break;
                 case 4:
-                    Metotlar.ortalama(isim,vizeNotu,finalNotu);
+                    Metotlar.ortalama(isim, vizeNotu, finalNotu, ortalama); // Bu satırı güncelleyin
                     break;
+
                 case 5:
                     Metotlar.enKucuk(isim,ortalama);
                     break;
